@@ -16,11 +16,17 @@ jQuery(function($) {
     document.body.appendChild(script);
 });
 
+
+
+
+
+
+
 function initialize() {
     var mapOptions = {
         zoom: 5,
         center: new google.maps.LatLng(34.0000, 54.0000),
-        mapTypeId: google.maps.MapTypeId.SATELLITE
+        
     };
     var map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
@@ -50,27 +56,26 @@ function initialize() {
 
     function newMarker(markers) {
         for (i = 0; i < markers.length; i++) {
-            var position = new google.maps.LatLng(markers[i][1],
-                markers[i][2]);
-            window.marker.push(new google.maps.Marker({
+			
+            var position = new google.maps.LatLng(markers[i][1],markers[i][2]);
+            	
                 position: position,
                 map: map,
                 icon: goldStar,
                 title: markers[i][0],
+				
             }));
             marker[i].icon.rotation = parseFloat(markers[i][3]);
+			//console.log(marker[i].getTitle())
+			
+            // Allow each marker to have an info window  
+			
+          
+				//alert('asd')
+			
 
-            // Allow each marker to have an info window    
-            /*google.maps.event.addListener(marker, 'click', (function(marker, i) {
-										//alert(marker.title)
-										return function() {
-											infoWindow.setContent(infoWindowContent[i][0]);
-											infoWindow.open(map, marker);
-											
-										}
-									})
-									(marker, i));*/
         }
+		
         return marker;
     }
 
@@ -103,25 +108,34 @@ function initialize() {
     var markers = [];
 
     function periodically() {
+		
         $.getJSON("ajax.php", function(data) {
 
             if (typeof markers[0] === 'undefined') {
                 $.each(data, function(key, val) {
                     markers.push([val.address, val.lat,
                         val.lon, val.bearing
+						
                     ]);
+					
                 })
                 newMarker(markers);
+				
+				 
+
             } else {
+				 
+
                 i = 0;
                 $.each(data, function(key, val) {
+					
                         //markers.push([val.address, val.lat,val.lon,val.bearing]);
                         if (markers[i][0] == val.address &&
                             (markers[i][1] != val.lat ||
                                 markers[i][2] != val.lon ||
                                 markers[i][3] != val.bearing
                             )) {
-                            alert('in')
+                           // alert('in')
                             var position = new google.maps.LatLng(
                                 val.lat, val.lon);
                             markers[i][1] = val.lat;
@@ -131,15 +145,19 @@ function initialize() {
                                 position, val.bearing);
                         }
                         if (markers[i][0] != val.address) {
-                            alert('jadid');
+                           // alert('jadid');
                         }
                         i++;
                     })
             }
         });
+		
         var infoWindow = new google.maps.InfoWindow(),
             marker, i;
         setTimeout(periodically, 3000);
+		
     }
+	
     periodically();
+	  
 }
