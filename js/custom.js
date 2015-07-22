@@ -21,3 +21,9 @@
     dialog.open();
     });
     })();
+
+$(document).ready(function(){
+
+
+
+});

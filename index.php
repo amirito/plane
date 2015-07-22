@@ -29,11 +29,33 @@
     </ul>
 </div>
 <section class="navbar-left">
-    <ul>
-        <li><a href="#"><img src="images/air-craft.png"></a></li>
+    <ul class="cl-menu">
+        <li>
+            <a href="#"><img src="images/air-craft.png"></a>
+            <div class="arrow-left"></div>
+            <ul>
+                <li>
+                    <a href="#">Navidad 2015</a>
+                </li>
+                <li>
+                    <a href="#">Navidad 2014</a>
+                </li>
+            </ul>
+        </li>
         <li><a href="#"><img src="images/air-ports.png"></a></li>
         <li><a href="#"><img src="images/play-log.png"></a></li>
-        <li><a href="#"><img src="images/filter.png"></a></li>
+        <li>
+            <a href="#"><img src="images/filter.png"></a>
+            <div class="arrow-left"></div>
+            <ul>
+                <li>
+                    <a href="#">Navidad 2015</a>
+                </li>
+                <li>
+                    <a href="#">Navidad 2014</a>
+                </li>
+            </ul>
+        </li>
         <li><a href="#"><img src="images/settings.png"></a></li>
     </ul>
     <a id="trigger-dialog" class="button button--dialog avatar">
@@ -90,5 +112,7 @@
 <script type="text/javascript" src="js/dynamics.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
 </body>
 </html>
