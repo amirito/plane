@@ -113,12 +113,12 @@
     </div>
 </div>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/plane.js"></script>
 <script type="text/javascript" src="js/draggabilly.pkgd.min.js"></script>
 <script type="text/javascript" src="js/dynamics.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
-<script type="text/javascript" src="js/jquery-1.7.0.min.js"></script>
 <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
 </body>
 </html>
