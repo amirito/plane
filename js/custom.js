@@ -21,8 +21,36 @@
     dialog.open();
     });
     })();
-
+name = '';
 $(document).ready(function(){
+     flag = false
+    $('.cl-menu li').click(function(){
+        id = this.id
+
+        if(flag){
+            if(id == name) {
+
+                $('ul.cl-menu li ul').removeClass('opened-cl');
+                $('ul.cl-menu li .arrow-left').removeClass('opened-cl');
+                flag = false;
+
+            }else {
+                name = id;
+                $('ul.cl-menu li ul').removeClass('opened-cl');
+                $('ul.cl-menu li#' + id + ' ul').addClass('opened-cl');
+                $('ul.cl-menu li .arrow-left').removeClass('opened-cl');
+                $('.cl-menu li#' + id + ' .arrow-left').addClass('opened-cl');
+            }
+        }
+        else if(!flag){
+            name = id;
+            $('ul.cl-menu li#'+id + ' ul').removeClass('closed-cl');
+            $('ul.cl-menu li#'+id + ' ul').addClass('opened-cl');
+            $('ul.cl-menu li .arrow-left').removeClass('closed-cl');
+            $('ul.cl-menu li#'+id + ' .arrow-left').addClass('opened-cl');
+            flag = true;
+        }
+    })
 
 
 

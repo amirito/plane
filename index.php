@@ -20,6 +20,12 @@
         <li><a href="#">News</a></li>
         <li><a href="#">Contacts</a></li>
     </ul>
+    <div class="user">
+        <div class="person"><a href="#"><img src="images/login-norm-search.png"></a></div>
+        <div class="search">
+            <input type="search">
+        </div>
+    </div>
 </section>
 <div class="top-vrr">
     <ul class="vrr-menu">
@@ -30,8 +36,8 @@
 </div>
 <section class="navbar-left">
     <ul class="cl-menu">
-        <li>
-            <a href="#"><img src="images/air-craft.png"></a>
+        <li id="air-craft">
+            <a><img src="images/air-craft.png"></a>
             <div class="arrow-left"></div>
             <ul>
                 <li>
@@ -42,10 +48,10 @@
                 </li>
             </ul>
         </li>
-        <li><a href="#"><img src="images/air-ports.png"></a></li>
-        <li><a href="#"><img src="images/play-log.png"></a></li>
-        <li>
-            <a href="#"><img src="images/filter.png"></a>
+        <li id="air-ports"><a><img src="images/air-ports.png"></a></li>
+        <li id="play-log"><a><img src="images/play-log.png"></a></li>
+        <li id="filter">
+            <a><img src="images/filter.png"></a>
             <div class="arrow-left"></div>
             <ul>
                 <li>
@@ -56,7 +62,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="#"><img src="images/settings.png"></a></li>
+        <li id="settings "><a><img src="images/settings.png"></a></li>
     </ul>
     <a id="trigger-dialog" class="button button--dialog avatar">
         <img src="images/avatar.png">

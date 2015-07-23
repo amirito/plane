@@ -129,6 +129,51 @@ body{
     text-align: center;
 }
 
+.user{
+    float: right;
+    padding: 10px 20px;
+}
+.search{
+    display: inline-block;
+}
+.search input{
+    width: 25px;
+    border-radius: 5px;
+    padding: 5px 0;
+    border: none;
+    background: url("../images/search.png") no-repeat left;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+    cursor: pointer;
+}
+.search input:focus{
+    border-radius: 50px;
+    padding: 5px 10px 5px 35px;
+    background: url("../images/search.png") no-repeat left;
+    background-color: #2f3843;
+    border: none;
+    color: #e5edf1;
+    width: 150px;
+    cursor: text;
+}
+.person{
+    display: inline-block;
+}
+.person a{
+   opacity: 0.5;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+.person a:hover{
+    opacity: 1;
+}
+
 #map_canvas{
     position: absolute;
     width: 100%;
@@ -140,19 +185,28 @@ body{
 	width:100%;
 	position:fixed;
 }
-
+.closed-cl{
+    display: none !important;
+}
+.opened-cl{
+    display: block !important;
+}
 .arrow-left {
     position: absolute;
-    left: 68px;
+    left: 69px;
     top: 0;
     width: 0;
     height: 0;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-right:7px solid #ddd;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid #ddd;
+    display: none;
 }
 .cl-menu li {
     position: relative;
+}
+.cl-menu li a{
+    cursor: pointer;
 }
 .cl-menu li ul {
     position: absolute;
@@ -161,7 +215,7 @@ body{
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    display:block;
+    display:none;
     padding: 10px;
     min-width: 200px;
     height: auto;
@@ -173,10 +227,6 @@ body{
     height: auto;
 }
 
-.cl-menu li:hover > ul {
-    display:block;
-    filter: alpha(opacity=80);
-}
 .cl-menu li ul li {
     border-top:none;
     border-left:none;
