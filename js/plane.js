@@ -35,7 +35,7 @@ function mouseclick(marker,map,length){
 						$.ajax({
 							
 								method: "GET",
-								url: "ajax_path.php",
+								url: "ajax/ajax_path.php",
 								data: {
 									address : marker.title
 								}
@@ -107,7 +107,7 @@ function initialize() {
     };
 		
 	airportsMarker = [];
-	 $.getJSON("ajax_airports.php", function(data) {
+	 $.getJSON("ajax/ajax_airports.php", function(data) {
                 var j = 0;
                 $.each(data, function(key, val) {
                         var position = new google.maps.LatLng(val.lat, val.lon);
@@ -159,7 +159,7 @@ function initialize() {
        
         $.ajax({
             method: "GET",
-            url: "ajax_new.php",
+            url: "ajax/ajax_new.php",
             data: {
                 marker_length: window.i
             }
@@ -199,7 +199,7 @@ function initialize() {
                 })
             }
         });
-        $.getJSON("ajax.php", function(data) {
+        $.getJSON("ajax/ajax.php", function(data) {
                 
                 i = 0;
                 $.each(data, function(key, val) {
