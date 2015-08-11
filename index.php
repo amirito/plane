@@ -27,7 +27,7 @@
     <div class="user">
         <div class="person"><a href="#"><img src="images/login-norm-search.png"></a></div>
         <div class="search">
-            <input type="search">
+            <input type="search" onblur="if(this.value =!'') { this.value = ''; }">
         </div>
     </div>
 </section>
