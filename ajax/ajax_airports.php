@@ -1,9 +1,8 @@
 <?php
-
-$conn = mysqli_connect('localhost','root','','plane');
+require('../core/core.php');
 
 $query = "SELECT * FROM airports";
-$result = mysqli_query($conn ,$query);
+$result = mysqli_query($connection ,$query);
 $rows = array();
 while($r = mysqli_fetch_assoc($result)){
 	$rows[] = $r;

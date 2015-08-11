@@ -1,3 +1,5 @@
+<?php require('core/core.php'); ?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
