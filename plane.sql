@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.4.9
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 23, 2015 at 02:33 PM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.12
+-- Host: localhost:3306
+-- Generation Time: Aug 11, 2015 at 11:39 AM
+-- Server version: 5.1.73
+-- PHP Version: 5.5.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `plane`
 --
-CREATE DATABASE IF NOT EXISTS `plane` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `plane`;
 
 -- --------------------------------------------------------
 
@@ -29,12 +27,11 @@ USE `plane`;
 --
 
 CREATE TABLE IF NOT EXISTS `airports` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `lat` varchar(255) NOT NULL,
-  `lon` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+  `lon` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `airports`
@@ -127,8 +124,7 @@ INSERT INTO `airports` (`id`, `name`, `lat`, `lon`) VALUES
 CREATE TABLE IF NOT EXISTS `altitude` (
   `ID` int(11) NOT NULL,
   `Altitude` int(11) NOT NULL,
-  `Code` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `Code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1437,8 +1433,7 @@ CREATE TABLE IF NOT EXISTS `maps` (
   `StrokeThickness` double NOT NULL,
   `IsFilled` varchar(250) NOT NULL,
   `IsClosed` varchar(250) NOT NULL,
-  `Path` text NOT NULL,
-  PRIMARY KEY (`ID`)
+  `Path` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1455,8 +1450,7 @@ CREATE TABLE IF NOT EXISTS `modesflights` (
   `Type` tinytext NOT NULL,
   `SerialNo` tinytext NOT NULL,
   `RegisteredOwners` tinytext NOT NULL,
-  `OperatorFlagCode` tinytext NOT NULL,
-  PRIMARY KEY (`ID`)
+  `OperatorFlagCode` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -40202,8 +40196,7 @@ CREATE TABLE IF NOT EXISTS `sitelocation` (
   `Latitude` double NOT NULL,
   `Longitude` double NOT NULL,
   `Altitude` double NOT NULL,
-  `MapPercent` double NOT NULL,
-  PRIMARY KEY (`ID`)
+  `MapPercent` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -40222,8 +40215,7 @@ INSERT INTO `sitelocation` (`ID`, `Name`, `Latitude`, `Longitude`, `Altitude`, `
 CREATE TABLE IF NOT EXISTS `smodecountry` (
   `ID` int(11) NOT NULL,
   `Name` text NOT NULL,
-  `Code` text NOT NULL,
-  PRIMARY KEY (`ID`)
+  `Code` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -40428,7 +40420,7 @@ INSERT INTO `smodecountry` (`ID`, `Name`, `Code`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tracks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `address` varchar(250) NOT NULL,
   `alt` varchar(250) NOT NULL,
   `bearing` varchar(250) NOT NULL,
@@ -40438,29 +40430,96 @@ CREATE TABLE IF NOT EXISTS `tracks` (
   `sensorId` varchar(250) NOT NULL,
   `squawk` varchar(250) NOT NULL,
   `vertSpeed` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `timestamp` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=91567 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tracks`
+-- Table structure for table `uniqe`
 --
 
-INSERT INTO `tracks` (`id`, `address`, `alt`, `bearing`, `callsign`, `lat`, `lon`, `sensorId`, `squawk`, `vertSpeed`) VALUES
-(1, 'iranair', '2000', '290', 'sdf', '40.910200', '55.43000', '10', '5844784', '200'),
-(2, 'mahan', 'sdf', '120', 'sdf', '39.440000', '52.400000', '10', '45778', '253'),
-(3, 'test', 'sdf', '10', 'sdf', '41.650000', '51.900000', '10', '7689', '2002'),
-(4, 'testg', 'sdf', '100', 'sdf', '31.840000', '57.600000', '10', '7689', '2002'),
-(8, 'teswef', 'sdf', '100', 'sdf', '36.840000', '54.600000', '45', '7689', '2002'),
-(9, 'zanjani', 'sdf', '100', 'sdf', '42.910200', '58.43000', '10', '5844784', '200'),
-(10, 'pooya', 'sdf', '10', 'sdf', '36.910200', '60.43000', '10', '5844784', '200'),
-(30, 'teswef', 'sdf', '200', 'sdf', '36.840000', '54.600000', '45', '7689', '2002'),
-(31, 'mahan', 'sdf', '30', 'sdf', '37.440000', '52.400000', '10', '45778', '253'),
-(32, 'aria', 'sdf', '90', 'sdf', '35.440000', '52.400000', '10', '45778', '253'),
-(33, 'aria', 'sdf', '120', 'sdf', '35.440000', '52.400000', '10', '45778', '253'),
-(34, 'mahan', 'sdf', '120', 'sdf', '39.440000', '51.400000', '10', '45778', '253'),
-(35, 'pooya', '2000', '90', 'sdf', '40.910200', '55.43000', '10', '5844784', '200'),
-(36, 'mahan22', '1200', '10', 'sdf', '38.440000', '52.400000', '10', '45778', '253');
+CREATE TABLE IF NOT EXISTS `uniqe` (
+  `id` int(11) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `alt` varchar(250) NOT NULL,
+  `bearing` varchar(250) NOT NULL,
+  `lat` varchar(250) NOT NULL,
+  `lon` varchar(250) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `airports`
+--
+ALTER TABLE `airports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `altitude`
+--
+ALTER TABLE `altitude`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `maps`
+--
+ALTER TABLE `maps`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `modesflights`
+--
+ALTER TABLE `modesflights`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `sitelocation`
+--
+ALTER TABLE `sitelocation`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `smodecountry`
+--
+ALTER TABLE `smodecountry`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tracks`
+--
+ALTER TABLE `tracks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `uniqe`
+--
+ALTER TABLE `uniqe`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `address` (`address`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `airports`
+--
+ALTER TABLE `airports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=78;
+--
+-- AUTO_INCREMENT for table `tracks`
+--
+ALTER TABLE `tracks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91567;
+--
+-- AUTO_INCREMENT for table `uniqe`
+--
+ALTER TABLE `uniqe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=118;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
