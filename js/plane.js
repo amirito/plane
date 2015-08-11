@@ -1,37 +1,74 @@
 marker = [];
+var infoWindowsOut = [];
+var infoWindowsClick = [];
 var flightPath = null;
 var flightPlanCoordinates = [];
-function mouseover(marker) {
+function mouseover(marker,map) {
+
+
     if (marker.activate != 1) {
+
         setIcon(marker, 'red', marker.icon.rotation);
+
+        var contentString =
+            '<div id="content">'+'<div id="bodyContent">'+
+            marker.title +'</div>'+'</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        infoWindowsOut.push(infowindow);
+
+        infowindow.open(map,marker);
     }
 }
-function mouseout(marker) {
+
+function closeAllInfoWindows(type) {
+    for (var i=0;i<type.length;i++) {
+        type[i].close();
+    }
+}
+
+function mouseout(marker,map) {
     if (marker.activate != 1) {
         setIcon(marker, '#d5d745', marker.icon.rotation);
+        closeAllInfoWindows(infoWindowsOut);
     }
 }
 function mouseclick(marker, map, length) {
 
     if (marker.activate == 0) {
-        marker.activate = 1;
 
-        setIcon(marker, '#444', marker.icon.rotation);
-        for (var k = 0; k < length; k++) {
-            if (k != marker.indexId) {
-                window.marker[k].activate = 0;
-                var bear = window.marker[k].icon.rotation;
-                setIcon(window.marker[k], '#d5d745', bear);
+
+
+        setTimeout(function(){
+            closeAllInfoWindows(infoWindowsClick);
+
+            var contentString =
+                '<div id="content">'+'<div id="bodyContent">'+
+                marker.title +'</div>'+'</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            infoWindowsClick.push(infowindow);
+
+            infowindow.open(map,marker);
+
+
+            marker.activate = 1;
+            for (var k = 0; k < length; k++) {
+                if (k != marker.indexId) {
+                    window.marker[k].activate = 0;
+                    var bear = window.marker[k].icon.rotation;
+
+                    setIcon(window.marker[k], '#d5d745', bear);
+
+
+                }
             }
-        }
 
-        if (flightPath == null || typeof(flightPath) === 'undefined') {
-
-        } else {
-            console.log(flightPath)
-            flightPath.setMap(null);
-        }
-
+            setIcon(marker, '#444', marker.icon.rotation);
         $.ajax({
 
             method: "GET",
@@ -43,36 +80,61 @@ function mouseclick(marker, map, length) {
             //console.log(data)
 
             var returnedData = JSON.parse(data);
-            flightPlanCoordinates = [];
-            flightPath = null;
+            name  = '';
             //alert(returnedData[0].address)
+            try {
+                flightPath.setMap(null);
+            }catch (e){}
+
+            try {
+                flightPlanCoordinates = [];
+
+            }catch (e){}
+
             $.each(returnedData, function (key, val) {
 
                 flightPlanCoordinates.push(new google.maps.LatLng(val.lat, val.lon))
-
+                name  = val.address;
 
             });
+
             flightPath = new google.maps.Polyline({
                 path: flightPlanCoordinates,
                 geodesic: true,
                 strokeColor: '#FFFF00',
                 strokeOpacity: 1.0,
-                strokeWeight: 2
+                strokeWeight: 2,
+                name : name
             })
 
             flightPath.setMap(map);
 
 
-        })
+        })},500);
 
 
     } else {
-        marker.activate = 0;
-        setIcon(marker, '#d5d745', marker.icon.rotation);
-        flightPath.setMap(null);
+
+        setTimeout(function(){
+            closeAllInfoWindows(infoWindowsClick);
+            try {
+                flightPath.setMap(null);
+            }catch (e){}
+
+            try {
+                flightPlanCoordinates = [];
+
+            }catch (e){}
+            marker.activate = 0;
+            setIcon(marker, '#d5d745', marker.icon.rotation);
+        },500);
     }
 }
+$('#play-log').click(function(){
 
+alert(flightPath.name);
+
+})
 function initialize() {
     var styles = [{stylers: [{hue: -10}, {saturation: -85}, {lightness: -30}]}];
 
@@ -128,13 +190,13 @@ function initialize() {
         mz = map.getZoom();
 
         if (parseInt(mz) > 5) {
-            for (var m = 0; m < 100; m++) {
+            for (var m = 0; m < airportsMarker.length; m++) {
                 airportsMarker[m].setVisible(true);
             }
         }
 
         else if (parseInt(mz) <= 5) {
-            for (var m = 0; m < 100; m++) {
+            for (var m = 0; m < airportsMarker.length; m++) {
                 airportsMarker[m].setVisible(false);
             }
 
@@ -177,13 +239,14 @@ function initialize() {
 
 
                     google.maps.event.addListener(marker[i], 'mouseover', function () {
-                        mouseover(marker[this.indexId]);
+                        mouseover(marker[this.indexId],map);
                     })
                     google.maps.event.addListener(marker[i], 'mouseout', function () {
-                        mouseout(marker[this.indexId]);
+                        mouseout(marker[this.indexId],map);
                     })
 
                     google.maps.event.addListener(marker[i], 'click', function () {
+
                         mouseclick(marker[this.indexId], map, marker.length);
                     })
                     window.i++;
@@ -199,7 +262,7 @@ function initialize() {
                 var position = new google.maps.LatLng(
                     val.lat, val.lon);
 
-                updateMarker(marker[i], position, val.bearing, val.alt);
+                updateMarker(marker[i], position, val.bearing, val.alt,map);
 
 
                 // }

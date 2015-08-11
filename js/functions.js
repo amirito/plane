@@ -28,7 +28,67 @@ function setIcon(marker, color, bearing) {
     });
 }
 
-function updateMarker(marker, position, bearing,zindex) {
+function updateMarker(marker, position, bearing,zindex,map) {
+    if(marker.activate == 1){
+
+
+        //marker.activate = 1;
+        //for (var k = 0; k < length; k++) {
+        //    if (k != marker.indexId) {
+        //        window.marker[k].activate = 0;
+        //        var bear = window.marker[k].icon.rotation;
+        //
+        //        setIcon(window.marker[k], '#d5d745', bear);
+        //    }
+        //}
+
+        //setIcon(marker, '#444', marker.icon.rotation);
+        $.ajax({
+
+            method: "GET",
+            url: "ajax/ajax_path.php",
+            data: {
+                address: marker.title
+            }
+        }).done(function (data) {
+            //console.log(data)
+
+            var returnedData = JSON.parse(data);
+            name = '';
+            //alert(returnedData[0].address)
+            try {
+                flightPath.setMap(null);
+            } catch (e) {
+            }
+
+            try {
+                flightPlanCoordinates = [];
+
+            } catch (e) {
+            }
+
+            $.each(returnedData, function (key, val) {
+
+                flightPlanCoordinates.push(new google.maps.LatLng(val.lat, val.lon))
+                name = val.address;
+
+            });
+
+            flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FFFF00',
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                name: name
+            })
+
+            flightPath.setMap(map);
+
+
+        })
+
+    }
     marker.setPosition(position)
 	marker.setZIndex(parseFloat(zindex));
     setIcon(marker, marker.icon.fillColor, bearing);
