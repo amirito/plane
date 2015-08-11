@@ -8,6 +8,8 @@
     <title>plane</title>
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link rel="stylesheet" type="text/css" href="css/dialog.css">
+    <link rel="stylesheet" type="text/css" href="css/slide.css">
+    <script type="text/javascript" src="js/modernizr.custom.js"></script>
 </head>
 <body>
 <section class="navbar-top">
@@ -69,8 +71,39 @@
     <a id="trigger-dialog" class="button button--dialog avatar">
         <img src="images/avatar.png">
     </a>
-</section>
 
+</section>
+<div class="plane-info">
+    <a href="#" class="close-btn"></a>
+    <div class="airline-logo"><img src="images/airline-logo.png"></div>
+
+    <div id="cbp-fwslider" class="cbp-fwslider">
+        <ul>
+            <li><a href="#"><img src="images/plane.png" alt="img01"/></a></li>
+            <li><a href="#"><img src="images/plane.png" alt="img02"/></a></li>
+            <li><a href="#"><img src="images/plane.png" alt="img03"/></a></li>
+        </ul>
+    </div>
+    <div class="airplane-model"><span>Jetsteam Jetsteam 41</span></div>
+    <div class="flight-info">
+        <span>
+            <p>Flight NO.</p>
+            <p>LH462</p>
+        </span>
+        <span>
+            <p>Callsign</p>
+            <p>DLH462</p>
+        </span>
+        <span>
+            <p>Tail</p>
+            <p>D-AIMG</p>
+        </span>
+    </div>
+    <div class="route">
+        <div class="line"></div>
+        <div class="flag"></div>
+    </div>
+</div>
 <div id="map_wrapper">
     <div id="map_canvas" class="mapping"></div>
 </div>
@@ -121,6 +154,26 @@
 <script type="text/javascript" src="js/dynamics.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
-<script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
+<script type="text/javascript" src="js/slide.min.js"></script>
+<script>
+    $( function() {
+        /*
+         - how to call the plugin:
+         $( selector ).cbpFWSlider( [options] );
+         - options:
+         {
+         // default transition speed (ms)
+         speed : 500,
+         // default transition easing
+         easing : 'ease'
+         }
+         - destroy:
+         $( selector ).cbpFWSlider( 'destroy' );
+         */
+
+        $( '#cbp-fwslider' ).cbpFWSlider();
+
+    } );
+</script>
 </body>
 </html>

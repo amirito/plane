@@ -3,6 +3,9 @@ body{
     background-color: #708494;
     margin: 0;
 }
+a{
+
+}
 .navbar-top{
     background-color: #343f4b;
     height: 75px;
@@ -231,4 +234,72 @@ body{
     border-top:none;
     border-left:none;
     border-right:none;
+}
+
+.plane-info{
+    position: fixed;
+    left: 0;
+    top: 75px;
+    height: 100%;
+    width: 250px;
+    z-index: 10;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+
+    background: rgba(117,189,209,1);
+    background: -moz-linear-gradient(top, rgba(117,189,209,1) 0%, rgba(71,128,189,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(117,189,209,1)), color-stop(0%, rgba(71,128,189,1)), color-stop(33%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(117,189,209,1) 0%, rgba(71,128,189,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(top, rgba(117,189,209,1) 0%, rgba(71,128,189,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(117,189,209,1) 0%, rgba(71,128,189,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(to bottom, rgba(117,189,209,1) 0%, rgba(71,128,189,1) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#75bdd1', endColorstr='#ffffff', GradientType=0 );
+
+
+}
+.close-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    background: url("../images/close.png") no-repeat;
+}
+
+.close-side{
+    transform: translate(-250px);
+    -webkit-transform: translate(-250px);
+    -moz-transform: translate(-250px);
+    -o-transform: translate(-250px);
+    -ms-transform: translate(-250px);
+}
+.airline-logo{
+    text-align: center;
+    margin-top: 20px;
+}
+.airplane-model{
+    text-align: center;
+}
+.airplane-model span{
+    font-size: 12px;
+    color: #777;
+}
+.flight-info{
+    text-align: center;
+    padding-top: 15px;
+}
+.flight-info span{
+    display: inline-block;
+    width: 30%;
+    font-size: 10px;
+}
+.flight-info span p:first-child{
+    color: #aaa;
+}
+.flight-info span p:nth-child(2){
+    color: #777;
 }

@@ -23,6 +23,10 @@
     })();
 name = '';
 $(document).ready(function(){
+
+    /* -------------------------------------
+     -------------nav cl menu---------------
+     ------------------------------------ */
      flag = false
     $('.cl-menu li').click(function(){
         id = this.id
@@ -52,6 +56,37 @@ $(document).ready(function(){
         }
     })
 
+    /* -------------------------------------
+    -----------plane info side-------------
+    ------------------------------------ */
+    var info_flag = true;
 
+    $('.person').click(function(){
+        if(info_flag){
+            $('.plane-info').removeClass('open-side');
+            $('.plane-info').addClass('close-side');
+            info_flag = false;
+        }
+        else if(!info_flag){
+            $('.plane-info').removeClass('close-side');
+            $('.plane-info').addClass('open-side');
+            info_flag = true;
+        }
+
+    })
+
+    $('.close-btn').click(function(){
+        if(info_flag){
+            $('.plane-info').removeClass('open-side');
+            $('.plane-info').addClass('close-side');
+            info_flag = false;
+        }
+        else if(!info_flag){
+            $('.plane-info').removeClass('close-side');
+            $('.plane-info').addClass('open-side');
+            info_flag = true;
+        }
+
+    })
 
 });
