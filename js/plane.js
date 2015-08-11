@@ -15,9 +15,9 @@ function mouseover(marker,map) {
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-        infoWindowsOut.push(infowindow);
+       // infoWindowsOut.push(infowindow);
 
-        infowindow.open(map,marker);
+      //  infowindow.open(map,marker);
     }
 }
 
@@ -48,9 +48,9 @@ function mouseclick(marker, map, length) {
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
-            infoWindowsClick.push(infowindow);
+          //  infoWindowsClick.push(infowindow);
 
-            infowindow.open(map,marker);
+         //   infowindow.open(map,marker);
 
 
             marker.activate = 1;
