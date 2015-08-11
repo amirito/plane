@@ -12,6 +12,7 @@ if(isset($_GET['marker_length'])){
 	$num_rows = mysqli_num_rows($result);
 	
 	$limit = $num_rows - $marker_length;
+	//$marker_length++;
 	
 	if($limit > 0){
 	$query2 = "SELECT t1.* FROM tracks t1
