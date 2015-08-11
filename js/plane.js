@@ -10,9 +10,7 @@ function mouseover(marker,map) {
 
         setIcon(marker, 'red', marker.icon.rotation);
 
-        var contentString =
-            '<div id="content">'+'<div id="bodyContent">'+
-            marker.title +'</div>'+'</div>';
+        var contentString = '<div class="test">'+marker.title +'</div>';
 
         var infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -44,9 +42,8 @@ function mouseclick(marker, map, length) {
         setTimeout(function(){
             closeAllInfoWindows(infoWindowsClick);
 
-            var contentString =
-                '<div id="content">'+'<div id="bodyContent">'+
-                marker.title +'</div>'+'</div>';
+            var contentString = '<div class="test">'+marker.title +'</div>';
+
 
             var infowindow = new google.maps.InfoWindow({
                 content: contentString

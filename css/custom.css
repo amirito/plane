@@ -303,3 +303,10 @@ a{
 .flight-info span p:nth-child(2){
     color: #777;
 }
+/*img[src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png"] {*/
+    /*display: none;*/
+/*}*/
+/*.gm-style-iw{*/
+    /*padding-right:-80px !important; ;*/
+    /*height: 15px;*/
+/*}*/
