@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Aug 11, 2015 at 11:39 AM
+-- Generation Time: Aug 12, 2015 at 06:05 PM
 -- Server version: 5.1.73
 -- PHP Version: 5.5.21
 
@@ -40431,22 +40431,22 @@ CREATE TABLE IF NOT EXISTS `tracks` (
   `squawk` varchar(250) NOT NULL,
   `vertSpeed` varchar(250) NOT NULL,
   `timestamp` bigint(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=91567 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=112003 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uniqe`
+-- Table structure for table `unique`
 --
 
-CREATE TABLE IF NOT EXISTS `uniqe` (
+CREATE TABLE IF NOT EXISTS `unique` (
   `id` int(11) NOT NULL,
   `address` varchar(250) NOT NULL,
   `alt` varchar(250) NOT NULL,
   `bearing` varchar(250) NOT NULL,
   `lat` varchar(250) NOT NULL,
   `lon` varchar(250) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=208 DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -40495,9 +40495,9 @@ ALTER TABLE `tracks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `uniqe`
+-- Indexes for table `unique`
 --
-ALTER TABLE `uniqe`
+ALTER TABLE `unique`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `address` (`address`);
 
@@ -40514,12 +40514,12 @@ ALTER TABLE `airports`
 -- AUTO_INCREMENT for table `tracks`
 --
 ALTER TABLE `tracks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91567;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=112003;
 --
--- AUTO_INCREMENT for table `uniqe`
+-- AUTO_INCREMENT for table `unique`
 --
-ALTER TABLE `uniqe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=118;
+ALTER TABLE `unique`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=208;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

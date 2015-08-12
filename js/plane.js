@@ -204,36 +204,35 @@ function initialize() {
     marker = [];
 
 
-    i = 0;
+    i = 1;
     function periodically() {
 
         $.ajax({
             method: "GET",
             url: "ajax/ajax_new.php",
             data: {
-                marker_length: window.i
+                marker_length: i
             }
         }).done(function (data) {
-            //alert(data)
+
             if (data != '0') {
                 var returnedData = JSON.parse(data);
-                //alert(returnedData[0].address)
+
                 $.each(returnedData, function (key, val) {
-                    //alert(val.address)
-                    var position = new google.maps.LatLng(
-                        val.lat, val.lon);
+
+                    var position = new google.maps.LatLng(val.lat, val.lon);
+                    console.log(val.address);
                     marker.push(new google.maps.Marker({
                         position: position,
                         map: map,
                         icon: goldStar,
                         title: val.address,
-                        indexId: window.i,
+                        indexId: i,
                         activate: 0,
                         zIndex: parseFloat(val.alt)
                     }));
 
-                    marker[window.i].icon.rotation = parseFloat(val.bearing);
-
+                    marker[i].icon.rotation = parseFloat(val.bearing);
 
                     google.maps.event.addListener(marker[i], 'mouseover', function () {
                         mouseover(marker[this.indexId],map);
@@ -246,26 +245,32 @@ function initialize() {
 
                         mouseclick(marker[this.indexId], map, marker.length);
                     })
-                    window.i++;
+                    i++;
                 })
             }
-        });
-        $.getJSON("ajax/ajax.php", function (data) {
 
-            i = 0;
-            $.each(data, function (key, val) {
+            $.getJSON("ajax/ajax.php", function (data) {
 
-
-                var position = new google.maps.LatLng(
-                    val.lat, val.lon);
-
-                updateMarker(marker[i], position, val.bearing, val.alt,map);
+                j = 1;
+                $.each(data, function (key, val) {
 
 
-                // }
-                i++;
+                    var position = new google.maps.LatLng(val.lat, val.lon);
+                    try{
+                        updateMarker(marker[j], position, val.bearing, val.alt,map);
+
+                    }catch (e){}
+
+
+
+                    // }
+                    j++;
+                })
             })
-        })
+
+
+        });
+
         //var infoWindow = new google.maps.InfoWindow(),marker, i;
         setTimeout(periodically, 3000);
     }
