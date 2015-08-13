@@ -29,6 +29,7 @@ function setIcon(marker, color, bearing) {
 }
 
 function updateMarker(marker, position, bearing,zindex,map) {
+
     if(marker.activate == 1){
 
 
@@ -41,7 +42,7 @@ function updateMarker(marker, position, bearing,zindex,map) {
         //        setIcon(window.marker[k], '#d5d745', bear);
         //    }
         //}
-
+        //
         //setIcon(marker, '#444', marker.icon.rotation);
         $.ajax({
 
@@ -89,7 +90,7 @@ function updateMarker(marker, position, bearing,zindex,map) {
         })
 
     }
-    marker.setPosition(position)
-	marker.setZIndex(parseFloat(zindex));
+    marker.setPosition(position);
+    marker.setZIndex(parseFloat(zindex));
     setIcon(marker, marker.icon.fillColor, bearing);
 }

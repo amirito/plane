@@ -4,7 +4,7 @@ require('../core/core.php');
 if(isset($_GET['marker_length'])){
 	$marker_length = $_GET['marker_length'];
 	
-	$query = "SELECT * FROM `unique`";
+	$query = "SELECT * FROM `last_data`";
 
 	$result = mysqli_query($connection ,$query);
 	$num_rows = mysqli_num_rows($result);
@@ -13,7 +13,7 @@ if(isset($_GET['marker_length'])){
 	//$marker_length++;
 	
 	if($limit > 0){
-	$query2 = "SELECT * FROM `unique` ORDER BY id LIMIT $marker_length , $limit";
+	$query2 = "SELECT * FROM `last_data` ORDER BY id LIMIT $marker_length , $limit";
 		
 	$result2 = mysqli_query($connection ,$query2);
 

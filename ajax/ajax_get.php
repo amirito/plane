@@ -20,15 +20,17 @@ if(isset($_POST['input'])){
 	$result = mysqli_query($connection ,$query);
 	echo 'done';
 
-    $query = "SELECT * FROM `unique` WHERE address = '$value->Address' ; ";
+    $query = "SELECT * FROM `last_data` WHERE address = '$value->Address' ; ";
     $result = mysqli_query($connection ,$query);
     $num_rows = mysqli_num_rows($result);
-        if($num_rows == 0){
-            $query = "INSERT INTO `unique`(`id`, `address`, `alt`, `bearing`, `lat`, `lon`)
+        if($num_rows == 0)
+        {
+            $query = "INSERT INTO `last_data`(`id`, `address`, `alt`, `bearing`, `lat`, `lon`)
                 VALUES ('','$value->Address','$value->Alt','$value->Bearing','$value->Lat','$value->Lon') ";
             mysqli_query($connection ,$query);
-        }else{
-            $query = "UPDATE `unique` SET `alt`='$value->Alt',`bearing`='$value->Bearing',
+        }
+        else{
+            $query = "UPDATE `last_data` SET `alt`='$value->Alt',`bearing`='$value->Bearing',
                     `lat`='$value->Lat',`lon`='$value->Lon' WHERE address = '$value->Address' ; ";
             mysqli_query($connection ,$query);
         }

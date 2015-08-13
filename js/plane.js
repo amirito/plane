@@ -204,7 +204,7 @@ function initialize() {
     marker = [];
 
 
-    i = 1;
+    i = 0;
     function periodically() {
 
         $.ajax({
@@ -221,7 +221,7 @@ function initialize() {
                 $.each(returnedData, function (key, val) {
 
                     var position = new google.maps.LatLng(val.lat, val.lon);
-                    console.log(val.address);
+
                     marker.push(new google.maps.Marker({
                         position: position,
                         map: map,
@@ -232,7 +232,7 @@ function initialize() {
                         zIndex: parseFloat(val.alt)
                     }));
 
-                    marker[i].icon.rotation = parseFloat(val.bearing);
+                    marker[window.i].icon.rotation = parseFloat(val.bearing);
 
                     google.maps.event.addListener(marker[i], 'mouseover', function () {
                         mouseover(marker[this.indexId],map);
@@ -248,30 +248,36 @@ function initialize() {
                     i++;
                 })
             }
+        })
 
-            $.getJSON("ajax/ajax.php", function (data) {
+        $.ajax({
+            method: "GET",
+            url: "ajax/ajax.php",
+            data: {
+              k:2
+            }
+        }).done(function (data) {
 
-                j = 1;
-                $.each(data, function (key, val) {
+            if (data != '0') {
 
+
+                var returnedData = JSON.parse(data);
+                y = 0;
+                $.each(returnedData, function (key, val) {
 
                     var position = new google.maps.LatLng(val.lat, val.lon);
-                    try{
-                        updateMarker(marker[j], position, val.bearing, val.alt,map);
-
-                    }catch (e){}
 
 
 
-                    // }
-                    j++;
+                    updateMarker(marker[y], position, val.bearing, val.alt ,map);
+                    console.log(marker[y].title + ' - '  + position + ' - ' +  val.bearing);
+                    y++;
                 })
-            })
+            }
+
+        })
 
 
-        });
-
-        //var infoWindow = new google.maps.InfoWindow(),marker, i;
         setTimeout(periodically, 3000);
     }
 
