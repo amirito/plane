@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/dialog.css">
     <link rel="stylesheet" type="text/css" href="css/slide.css">
     <script type="text/javascript" src="js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize"></script>
 </head>
 <body>
 <section class="navbar-top">
@@ -73,17 +74,35 @@
     </a>
 
 </section>
-<div class="plane-info">
+<script>
+    function testy(address){
+        $("#image_address").html("");
+        $(".cbp-fwdots").html("");
+        $.ajax({
+            method: "GET",
+            url: "ajax/ajax_get_image.php",
+            data: {
+               address:address
+            }
+        }).done(function (data) {
+
+            setTimeout(function(){
+                $("#image_address").html(data);
+                $( '#cbp-fwslider' ).cbpFWSlider();
+            },1000)
+
+        })
+    }
+
+</script>
+<div class="plane-info close-side">
     <a href="#" class="close-btn"></a>
     <div class="airline-logo"><img src="images/airline-logo.png"></div>
 
     <div id="cbp-fwslider" class="cbp-fwslider">
-        <ul>
-            <li><a href="#"><img src="images/plane.png" alt="img01"/></a></li>
-            <li><a href="#"><img src="images/plane.png" alt="img02"/></a></li>
-            <li><a href="#"><img src="images/plane.png" alt="img03"/></a></li>
-        </ul>
+        <ul id="image_address"></ul>
     </div>
+
     <div class="airplane-model"><span>Jetsteam Jetsteam 41</span></div>
     <div class="flight-info">
         <span>

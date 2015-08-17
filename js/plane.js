@@ -33,13 +33,24 @@ function mouseout(marker,map) {
         closeAllInfoWindows(infoWindowsOut);
     }
 }
+
+
 function mouseclick(marker, map, length) {
+
+    $('.plane-info').removeClass('open-side');
+    $('.plane-info').addClass('close-side');
+    $("#image_address").html("");
+
+
+    testy(marker.title);
 
     if (marker.activate == 0) {
 
 
 
         setTimeout(function(){
+            $('.plane-info').removeClass('close-side');
+            $('.plane-info').addClass('open-side');
             closeAllInfoWindows(infoWindowsClick);
 
             var contentString = '<div class="test">'+marker.title +'</div>';
@@ -113,6 +124,10 @@ function mouseclick(marker, map, length) {
     } else {
 
         setTimeout(function(){
+            $("#image_address").html("");
+            $('.plane-info').removeClass('open-side');
+            $('.plane-info').addClass('close-side');
+
             closeAllInfoWindows(infoWindowsClick);
             try {
                 flightPath.setMap(null);
@@ -270,7 +285,7 @@ function initialize() {
 
 
                     updateMarker(marker[y], position, val.bearing, val.alt ,map);
-                    console.log(marker[y].title + ' - '  + position + ' - ' +  val.bearing);
+                   // console.log(marker[y].title + ' - '  + position + ' - ' +  val.bearing);
                     y++;
                 })
             }
