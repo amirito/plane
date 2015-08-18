@@ -25,13 +25,13 @@ if(isset($_POST['input'])){
     $num_rows = mysqli_num_rows($result);
         if($num_rows == 0)
         {
-            $query = "INSERT INTO `last_data`(`id`, `address`, `alt`, `bearing`, `lat`, `lon`)
-                VALUES ('','$value->Address','$value->Alt','$value->Bearing','$value->Lat','$value->Lon') ";
+            $query = "INSERT INTO `last_data`(`id`, `address`, `alt`, `bearing`, `lat`, `lon`, `timestamp`,`activate`)
+                VALUES ('','$value->Address','$value->Alt','$value->Bearing','$value->Lat','$value->Lon',UNIX_TIMESTAMP(), '1' ) ; ";
             mysqli_query($connection ,$query);
         }
         else{
             $query = "UPDATE `last_data` SET `alt`='$value->Alt',`bearing`='$value->Bearing',
-                    `lat`='$value->Lat',`lon`='$value->Lon' WHERE address = '$value->Address' ; ";
+                    `lat`='$value->Lat',`lon`='$value->Lon',`timestamp` = UNIX_TIMESTAMP() WHERE address = '$value->Address' ; ";
             mysqli_query($connection ,$query);
         }
 

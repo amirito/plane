@@ -10,10 +10,9 @@ function dump(obj) {
 }
 jQuery(function($) {
     // Asynchronously Load the map API 
-    var script = document.createElement('script');
-    script.src =
-        "http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize";
-    document.body.appendChild(script);
+    //var script = document.createElement('script');
+    //script.src ="http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize";
+    //document.body.appendChild(script);
 });
 
 function setIcon(marker, color, bearing) {

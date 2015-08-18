@@ -1,4 +1,4 @@
-marker = [];
+marker = new Array();
 var infoWindowsOut = [];
 var infoWindowsClick = [];
 var flightPath = null;
@@ -26,7 +26,11 @@ function closeAllInfoWindows(type) {
         type[i].close();
     }
 }
+$('.person').click(function(){
 
+window.marker['7335C7'].setMap(null);
+
+})
 function mouseout(marker,map) {
     if (marker.activate != 1) {
         setIcon(marker, '#d5d745', marker.icon.rotation);
@@ -35,7 +39,7 @@ function mouseout(marker,map) {
 }
 
 
-function mouseclick(marker, map, length) {
+function mouseclick(marker, map, length,markers) {
 
     $('.plane-info').removeClass('open-side');
     $('.plane-info').addClass('close-side');
@@ -65,12 +69,17 @@ function mouseclick(marker, map, length) {
 
 
             marker.activate = 1;
-            for (var k = 0; k < length; k++) {
-                if (k != marker.indexId) {
-                    window.marker[k].activate = 0;
-                    var bear = window.marker[k].icon.rotation;
 
-                    setIcon(window.marker[k], '#d5d745', bear);
+            for (var k = 0; k < length; k++) {
+                x =  markers[k];
+
+
+
+                if (window.marker[x].title !== marker.title) {
+                    window.marker[x].activate = 0;
+                    var bear = window.marker[x].icon.rotation;
+
+                    setIcon(window.marker[x], '#d5d745', bear);
 
 
                 }
@@ -86,7 +95,6 @@ function mouseclick(marker, map, length) {
             }
         }).done(function (data) {
             //console.log(data)
-
             var returnedData = JSON.parse(data);
             name  = '';
             //alert(returnedData[0].address)
@@ -100,7 +108,7 @@ function mouseclick(marker, map, length) {
             }catch (e){}
 
             $.each(returnedData, function (key, val) {
-
+   // alert(val.address)
                 flightPlanCoordinates.push(new google.maps.LatLng(val.lat, val.lon))
                 name  = val.address;
 
@@ -215,86 +223,95 @@ function initialize() {
         }
     });
 
+    var markers = [];
 
-    marker = [];
 
 
-    i = 0;
+    var i = 0;
     function periodically() {
-
+    var newTest = "";
+    for(var u = 0 ; u < markers.length;u++){
+       newTest +=  markers[u]+','
+        }
+    //console.log(newTest);
         $.ajax({
             method: "GET",
-            url: "ajax/ajax_new.php",
+            url: "ajax/ajax_mehrdad.php",
             data: {
-                marker_length: i
-            }
-        }).done(function (data) {
+                markers: newTest
+                }
+            }).done(function (data) {
 
-            if (data != '0') {
-                var returnedData = JSON.parse(data);
+                var res = data.split("+");
+                var newData = res[0];
+                var updateData = res[1];
+                var deleteData = res[2];
 
-                $.each(returnedData, function (key, val) {
+                if(newData != "0"){
+                    var newJsonData = JSON.parse(newData);
+                    $.each(newJsonData, function (key, val) {
+
+                        var position = new google.maps.LatLng(val.lat, val.lon);
+
+                        marker[val.address] = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            icon: goldStar,
+                            title: val.address,
+                            activate: 0,
+                            zIndex: parseFloat(val.alt)
+                        });
+                        markers.push(marker[val.address].title);
+                        marker[val.address].icon.rotation = parseFloat(val.bearing);
+
+                        google.maps.event.addListener(marker[val.address], 'mouseover', function () {
+                            mouseover(marker[val.address],map);
+                        })
+                        google.maps.event.addListener(marker[val.address], 'mouseout', function () {
+                            mouseout(marker[val.address],map);
+                        })
+
+                        google.maps.event.addListener(marker[val.address], 'click', function () {
+
+                            mouseclick(marker[val.address], map, markers.length,markers);
+                        })
+
+                        i++;
+
+
+                    })
+                }
+
+
+            if(updateData != "0"){
+                var updateJsonData = JSON.parse(updateData);
+                $.each(updateJsonData, function (key, val) {
 
                     var position = new google.maps.LatLng(val.lat, val.lon);
-
-                    marker.push(new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        icon: goldStar,
-                        title: val.address,
-                        indexId: i,
-                        activate: 0,
-                        zIndex: parseFloat(val.alt)
-                    }));
-
-                    marker[window.i].icon.rotation = parseFloat(val.bearing);
-
-                    google.maps.event.addListener(marker[i], 'mouseover', function () {
-                        mouseover(marker[this.indexId],map);
-                    })
-                    google.maps.event.addListener(marker[i], 'mouseout', function () {
-                        mouseout(marker[this.indexId],map);
-                    })
-
-                    google.maps.event.addListener(marker[i], 'click', function () {
-
-                        mouseclick(marker[this.indexId], map, marker.length);
-                    })
-                    i++;
-                })
-            }
-        })
-
-        $.ajax({
-            method: "GET",
-            url: "ajax/ajax.php",
-            data: {
-              k:2
-            }
-        }).done(function (data) {
-
-            if (data != '0') {
+                    updateMarker(marker[val.address], position, val.bearing, val.alt ,map);
 
 
-                var returnedData = JSON.parse(data);
-                y = 0;
-                $.each(returnedData, function (key, val) {
-
-                    var position = new google.maps.LatLng(val.lat, val.lon);
-
-
-
-                    updateMarker(marker[y], position, val.bearing, val.alt ,map);
-                   // console.log(marker[y].title + ' - '  + position + ' - ' +  val.bearing);
-                    y++;
                 })
             }
 
+            if(deleteData != "0"){
+                var deleteJsonData = JSON.parse(deleteData);
+                $.each(deleteJsonData, function (key, val) {
+
+                    marker[val.address].setMap(null);
+
+
+                })
+            }
+
+
         })
 
+        setTimeout(periodically,3000);
 
-        setTimeout(periodically, 3000);
+
     }
 
     periodically();
+
 }

@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/dialog.css">
     <link rel="stylesheet" type="text/css" href="css/slide.css">
     <script type="text/javascript" src="js/modernizr.custom.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize"></script>
+
 </head>
 <body>
 <section class="navbar-top">
@@ -167,6 +167,7 @@
     </div>
 </div>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize"></script>
 <script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/plane.js"></script>
 <script type="text/javascript" src="js/draggabilly.pkgd.min.js"></script>
